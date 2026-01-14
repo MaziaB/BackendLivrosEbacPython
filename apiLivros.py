@@ -15,10 +15,17 @@
 # Query Strings ('?' para adicionar informações à URL), tudo depois do '?' é 'query string'
 
 from fastapi import FastAPI, HTTPException # HTTPException - para tratamento de erros
+from pydantic import BaseModel # Estruturação das informações
+from typing import Optional
 
 app = FastAPI()
 
 livros = {} # Para armazenamento e manipulação de dados; banco de dados improvisado.
+
+class Livro(BaseModel):
+    nome_livro: str
+    autor_livro: str
+    ano_livro: int 
 
 @app.get("/livros") # rota/path - /livros
 def get_livros():
@@ -29,28 +36,23 @@ def get_livros():
     
 
 @app.post("/adiciona")
-def post_livros(id_livro: int, nome_livro: str, autor_livro: str, ano_livro: int):
+def post_livros(id_livro: int, livro: Livro):
     if id_livro in livros:
         raise HTTPException (status_code=400, detail="Este livro já existe!")
     else:
-        livros[id_livro] = {"nome_livro": nome_livro, "autor_livro": autor_livro, "ano_livro": ano_livro}
+        livros[id_livro] = Livro
         return{"mensagem": "Livro criado com sucesso!"}
     
 
 @app.put("/atualiza/{id_livro}")
-def put_livros(id_livro: int, nome_livro: str, autor_livro: str, ano_livro: str):
+def put_livros(id_livro: int, livro: Livro):
     meu_livro = livros.get(id_livro)
     if not meu_livro:
         raise HTTPException(status_code=404, detail="Esse livro não foi encontrado!")
     else:
-        if nome_livro: # validação
-            meu_livro["nome_livro"] = nome_livro # atualização
-        if autor_livro:
-            meu_livro["autor_livro"] = autor_livro
-        if ano_livro:
-            meu_livro["ano_livro"] = ano_livro
+       meu_livro[id_livro] = Livro
 
-        return {"mensagem": "As informações do seu livro foram atualizadas com sucesso!"}
+       return {"mensagem": "As informações do seu livro foram atualizadas com sucesso!"}
     
 
 @app.delete("/deletar/{id_livro}")
