@@ -36,7 +36,7 @@ def get_livros():
     
 
 @app.post("/adiciona")
-def post_livros(id_livro: int, livro: Livro):
+def post_livros(id_livro: int, livros: Livro):
     if id_livro in livros:
         raise HTTPException (status_code=400, detail="Este livro já existe!")
     else:
@@ -45,12 +45,12 @@ def post_livros(id_livro: int, livro: Livro):
     
 
 @app.put("/atualiza/{id_livro}")
-def put_livros(id_livro: int, livro: Livro):
+def put_livros(id_livro: int, livros: Livro):
     meu_livro = livros.get(id_livro)
     if not meu_livro:
         raise HTTPException(status_code=404, detail="Esse livro não foi encontrado!")
     else:
-       meu_livro[id_livro] = Livro
+       livros[id_livro] = Livro
 
        return {"mensagem": "As informações do seu livro foram atualizadas com sucesso!"}
     

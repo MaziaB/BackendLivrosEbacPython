@@ -28,3 +28,5 @@
 
 # Post, Get, Put, Delete - essa estrutura, dentro de uma API, é chamada de CRUD (Creat, Read, Update, Delete).
 # google.com.br, youtube.com.br... esses endereços são 'endpoints'
+
+# Corpo da requisição HTTP: padrão - JSON
