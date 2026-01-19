@@ -30,3 +30,8 @@
 # google.com.br, youtube.com.br... esses endereços são 'endpoints'
 
 # Corpo da requisição HTTP: padrão - JSON
+
+# Documentação Swagger - documentar os endpoints da nossa aplicação (da API)
+
+# Autenticação: processo de identificar/autenticar a identidade do usuário no sistema.
+# Autorização: restrições de acesso à informações ou a funções de um sistema ou aplicação.

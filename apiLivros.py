@@ -18,7 +18,15 @@ from fastapi import FastAPI, HTTPException # HTTPException - para tratamento de 
 from pydantic import BaseModel # Estruturação das informações
 from typing import Optional
 
-app = FastAPI()
+app = FastAPI(
+    title="API de livros",
+    description="API para gerenciar catálogo de livros",
+    version="1.0.0",
+    contact={
+        "Nome": "Bruno Moraes",
+        "e-mail": "bruno@email.com"
+    }
+)
 
 livros = {} # Para armazenamento e manipulação de dados; banco de dados improvisado.
 
