@@ -35,3 +35,9 @@
 
 # Autenticação: processo de identificar/autenticar a identidade do usuário no sistema.
 # Autorização: restrições de acesso à informações ou a funções de um sistema ou aplicação.
+
+# Métodos de autenticação do sistema: 
+# JWT (JSON wbe token) - é um método onde o servidor 
+# gera um token de autenticação com as informações do usuário.
+# APIgateway - é uma ferramenta de proteção para aplicações web, que usa JWT.
+# OAuth 2.0 - atenticação em ambientes externos (google, facebook...)
