@@ -14,9 +14,9 @@
 # http://127.0.0.1:8000/adiciona?id_livro=1&nome_livro=Harry%20Potter&autor_livro=J.K&ano_livro=2005
 # Query Strings ('?' para adicionar informações à URL), tudo depois do '?' é 'query string'
 
-from fastapi import FastAPI, HTTPException, Depends # HTTPException - para tratamento de erros
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
-from pydantic import BaseModel # Estruturação das informações
+from pydantic import BaseModel
 from typing import Optional
 import secrets
 import os
