@@ -45,7 +45,7 @@ class Livro(BaseModel):
 
 
 def autenticar_meu_usuario(credentials: HTTPBasicCredentials = Depends(security)):
-    is_username_correct = secrets.compare_digest(credentials.user, MEU_USUARIO)
+    is_username_correct = secrets.compare_digest(credentials.username, MEU_USUARIO)
     is_password_correct = secrets.compare_digest(credentials.password, MINHA_SENHA)
 
     if not (is_password_correct and is_username_correct):
