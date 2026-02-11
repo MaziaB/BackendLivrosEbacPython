@@ -57,12 +57,26 @@ def autenticar_meu_usuario(credentials: HTTPBasicCredentials = Depends(security)
 
 
 @app.get("/livros") # rota/path - /livros
-def get_livros(credentials: HTTPBasicCredentials = Depends(autenticar_meu_usuario)):
+def get_livros(page: int = 1, limit int = 10, credentials: HTTPBasicCredentials = Depends(autenticar_meu_usuario)):
+    if page < 1 or limit < 1:
+        raise HTTPException(status_code=400, detail="page ou limit estão com valores inválidos")    
     if not livros:
         return {"mensagem": "Não existe nenhum livro!"} # JSON
-    else:
-        return {"Livros": livros}
+
+    start = {page - 1} * limit
+    end = start + limit
+
+    livros_paginados = [
+        {"id": id_livro, "nome_livro": livro_data["nome_livro"], "autor_livro": livro_data["autor_livro"], "ano_livro": livro_data["ano_livro"]}
+        for id_livro, livro_data in list(livros.items()) [start:end]
+    ]
     
+    return {
+        "page": page,
+        "limit": limit,
+        "total": len(livros),
+        "livros": livros_paginados
+    }
 
 @app.post("/adiciona")
 def post_livros(id_livro: int, livros: Livro, credentials: HTTPBasicCredentials = Depends(autenticar_meu_usuario)):
